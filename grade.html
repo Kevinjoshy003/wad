@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grade Calculator</title>
+</head>
+<body>
+    <h1>Grade Calculator</h1>
+    
+    <form id="gradeForm">
+        <label for="score">Enter Student Scores:</label>
+        <input type="number" id="score" placeholder="Enter a score">
+        <button type="button" id="addScore">Add Score</button>
+    </form>
+
+    <div id="results">
+        <h2>Student Grades:</h2>
+        <ul id="gradeList"></ul>
+        <h2>Average Grade of the Class:</h2>
+        <p id="averageGrade">N/A</p>
+    </div>
+
+    <script>
+        // Function to calculate the grade of a student based on their score
+        function calculateGrade(score) {
+            if (score >= 90) {
+                return "A+";
+            } else if (score >= 80) {
+                return "A";
+            } else if (score >= 70) {
+                return "B";
+            } else if (score >= 60) {
+                return "C";
+            } else if (score >= 50) {
+                return "D";
+            } else {
+                return "F";
+            }
+        }
+
+        // Function to calculate the average grade of a class
+        function calculateClassAverage(scores) {
+            if (scores.length === 0) {
+                return 0;
+            }
+
+            let total = 0;
+            for (let score of scores) {
+                total += score;
+            }
+
+            const average = total / scores.length;
+            return average;
+        }
+
+        const scoreInput = document.getElementById("score");
+        const addScoreButton = document.getElementById("addScore");
+        const gradeList = document.getElementById("gradeList");
+        const averageGrade = document.getElementById("averageGrade");
+        const scores = [];
+
+        addScoreButton.addEventListener("click", function () {
+            const scoreValue = parseInt(scoreInput.value, 10);
+            if (!isNaN(scoreValue)) {
+                scores.push(scoreValue);
+                const grade = calculateGrade(scoreValue);
+                const listItem = document.createElement("li");
+                listItem.textContent = `Score: ${scoreValue}, Grade: ${grade}`;
+                gradeList.appendChild(listItem);
+                scoreInput.value = "";
+                const avg = calculateClassAverage(scores);
+                averageGrade.textContent = avg.toFixed(2);
+            } else {
+                alert("Please enter a valid score.");
+            }
+        });
+    </script>
+</body>
+</html>

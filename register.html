@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        div {
+            padding-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <label for="name">
+        Name :
+        <div>
+            <input type="text" placeholder="Enter your name" id="name">
+        </div>
+    </label>
+    <label for="password">
+        Password :
+        <div>
+            <input type="password" placeholder="Enter your password" id="password">
+        </div>
+    </label>
+    <label for="Confirm-Password">
+        Confirm Password :
+        <div>
+            <input type="password" placeholder="Confirm your password" id="Confirm-Password">
+        </div>
+    </label>
+    <input type="button" value="register" id="register">
+    <script>
+        const register = document.getElementById("register");
+        register.addEventListener("click",function() {
+            let pwd = document.getElementById("password").value.trim();
+            let conf_pwd = document.getElementById("Confirm-Password").value.trim();
+            console.log(pwd,conf_pwd);
+            if(pwd == "" && conf_pwd==""){
+                return;
+            }
+            if(pwd == conf_pwd){
+                alert("User registered successfully !");
+            }else{
+                alert("Password doesn't match ");
+            }
+        });
+    </script>
+</body>
+</html>
